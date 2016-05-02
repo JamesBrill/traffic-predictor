@@ -61,10 +61,11 @@ def simplify_data(data):
 
 def standardise_density(data):
     densities = [record['density'] for record in data]
+    reshaped_densities = np.array(densities).reshape((len(densities), 1)) # to 2D array for scikit
     scaler = StandardScaler()
-    standardised_densities = scaler.fit_transform(densities)
+    standardised_densities = scaler.fit_transform(reshaped_densities)
     for i in range(len(data)):
-        data[i]['density'] = standardised_densities[i]
+        data[i]['density'] = standardised_densities[i][0]
     return data
 
 def convert_to_csv_format(data):
