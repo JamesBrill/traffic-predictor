@@ -75,7 +75,7 @@ def convert_to_csv_format(data):
     return output
 
 def export_to_csv(data):
-    with open('output.csv', 'w', newline='') as csv_file:
+    with open('output.csv', 'wb') as csv_file:
         writer = csv.writer(csv_file, delimiter=',')
         writer.writerows(data)
 
