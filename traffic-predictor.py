@@ -23,7 +23,7 @@ def remove_faulty_data(data):
 
 def aggregate_records(timestamp, records):
     output = []
-    ids = [record['scn'] for record in records]
+    ids = set([record['scn'] for record in records])
     for id in ids:
         records_for_id = filter((lambda x : x['scn'] == id), records)
         vehicle_lengths = map((lambda x : int(x['vehicle_length'])), records_for_id)
