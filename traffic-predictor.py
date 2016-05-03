@@ -39,7 +39,7 @@ def discretise_data(data):
     timestamps = sorted(list(set([record['timestamp'] for record in data])))
     start = timestamps[0]
     for timestamp in timestamps:
-        if timestamp < (start + 10): #TODO: for full data, should be +900 for 15 minutes
+        if timestamp < (start + 60): #TODO: for full data, should be +900 for 15 minutes
             records += [record for record in data if record['timestamp'] == timestamp]
         else:
             discretised_records += aggregate_records(start, records)
@@ -84,7 +84,7 @@ def main():
     raw_data = get_data_from_csv()
     print "Removing damaged data..."
     clean_data = remove_faulty_data(raw_data)
-    print "Aggregating data into 10 second intervals..."
+    print "Aggregating data into 1 minute intervals..."
     discretised_data = discretise_data(clean_data)
     print "Converting sensor data into density values..."
     simplified_data = simplify_data(discretised_data)
